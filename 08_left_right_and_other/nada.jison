@@ -19,8 +19,12 @@
 
 pgm
     :                     /* enjoy the silence */
+    | pgm comment
     | pgm block           { ary.push($2); }
     | pgm eof             { console.log(ary.join("\n")); }
+    ;
+comment
+    : COMMENT end
     ;
 block
     : MATHBLOCK e end     { $$ = $2 }

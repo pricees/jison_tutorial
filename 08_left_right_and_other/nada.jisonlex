@@ -3,11 +3,12 @@
 // OMG our first token!
 
 num          [0-9]+("."[0-9]+)?\b
+ws           \s+
 
 %%
-"//".*        /* ignore comment */
 \n            return 'END';
-\s+           /* ignore whitespace, VERY IMPORTANT */
+"//".*        return 'COMMENT';
+{ws}          /* ignore whitespace */
 "("           return 'LPAREN';
 ")"           return 'RPAREN';
 "-"           return '-';

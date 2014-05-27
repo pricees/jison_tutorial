@@ -1,3 +1,5 @@
+// this is a comment
+// and it is ignored
 math (1)
 math (-1)
 math -5
