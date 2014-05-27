@@ -5,7 +5,8 @@
 num          [0-9]+("."[0-9]+)?\b
 
 %%
-\n        return 'END';
+"//".*        /* ignore comment */
+\n            return 'END';
 \s+           /* ignore whitespace, VERY IMPORTANT */
 "("           return 'LPAREN';
 ")"           return 'RPAREN';

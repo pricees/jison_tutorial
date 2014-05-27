@@ -10,37 +10,35 @@
 
 // Operator associativity
 %left '-'
-%nonassoc '*'
+%left '*'
 %left "+"
 
 %start pgm
 
 %%
 
-pgm 
-    :           /* enjoy the silence */
-    | pgm block { ary.push($2); }
-    | pgm eof    { console.log(ary.join("\n")); }
+pgm
+    :                     /* enjoy the silence */
+    | pgm block           { ary.push($2); }
+    | pgm eof             { console.log(ary.join("\n")); }
     ;
 block
-    : mathblock e end    { $$ = $2 }
-    ;
-mathblock
-    : MATHBLOCK 
+    : MATHBLOCK e end     { $$ = $2 }
     ;
 end
     : END         
+    | end END
     ;
 eof
     : EOF
     ;
 e
-    : NUM                  { $$ = Number($1); }
-    | '-' e %prec UMINUS   { $$ = -$2; }
-    | LPAREN e RPAREN      { $$ = Math.abs($2); }
-    | e "*" e              { $$ = $1 * $3; }
-    | "+" e e              { $$ = $2 + $3; }
-    | PI                   { $$ = Math.PI; }
+    : NUM                 { $$ = Number($1); }
+    | '-' e %prec UMINUS  { $$ = -$2; }
+    | LPAREN e RPAREN     { $$ = Math.abs($2); }
+    | e '*' e             { $$ = $1 * $3; }
+    | '+' e e             { $$ = $2 + $3; }
+    | PI                  { $$ = Math.PI; }
     ;
 %%
 
